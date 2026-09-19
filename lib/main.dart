@@ -30,6 +30,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int num = 1;
+  static const List<String> terms = [
+    "1. Пузырьковая сортировка",
+    "2. Сортировка вставками",
+    "3. Quick sort",
+  ];
+
+  Container getImg(int ind) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 50),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.asset(
+          'assets/imgs/$ind.jpg',
+          width: 220,
+          height: 120,
+          fit: BoxFit.fill,
+        ),
+      )
+    );
+  }
 
   void changeImg() {
     setState(() {
@@ -71,27 +91,40 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             const Divider(),
-            Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: changeImg,
-                    child: Image.asset(
-                      'assets/imgs/$num.jpg',
-                      width: 120,
-                      height: 120,
-                      fit: BoxFit.contain,
-                    )
+            SizedBox(
+              height: 120,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  getImg(1),
+                  getImg(2),
+                  getImg(3),
+                  getImg(4),
+                  getImg(5),
+                ],
+              ),
+            ),
+            const Divider(),
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: terms.length,
+              itemBuilder: (context, index) {
+                var term= terms[index];
+
+                return Card(
+                  child:
+                  ListTile(
+                    title: Text(term, style: TextStyle(fontSize: 18, fontFamily: 'CascadiaCode'),),                             // текст
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(term),
+                          duration: const Duration(seconds: 3),
+                        )
+                      );
+                    },
                   ),
-                ),
-                Expanded(child: Column(crossAxisAlignment: .start,
-                  children: [
-                    Text("1. Пузырьковая сортировка", style: TextStyle(fontSize: 18)),
-                    Text("2. Сортировка вставками", style: TextStyle(fontSize: 18)),
-                    Text("3. Quick sort", style: TextStyle(fontSize: 18)),
-                  ],
-                ))
-              ],
+                );
+              },
             ),
             const SizedBox(height: 20),
             const Row(
@@ -101,11 +134,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text('Баранов Ю. С. ИКБО-61-23', style: TextStyle(fontSize: 18)),
               ],
             ), //Row
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: changeImg,
-              child: Text('Изменить картинку'),
-            ),
           ],
         ), //Column
       ),
