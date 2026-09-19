@@ -29,6 +29,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int num = 1;
+
+  void changeImg() {
+    setState(() {
+      num++;
+
+      if (num > 5) {
+        num = 1;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,25 +56,32 @@ class _MyHomePageState extends State<MyHomePage> {
             const Center(
                 child: Text(
                   'Алгоритмы сортировки',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'CascadiaCode',
+                  ),
                 )
             ),
             const Center(
               child: Text(
                 'Мы визуализируем и объясняем алгоритмы сортировки. '
                 'Наша цель — разложить по полочкам порядок, сложность и логику работы с данными.',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, fontFamily: 'CascadiaCode',),
               ),
             ),
             const Divider(),
             Row(
               children: [
                 Expanded(
-                  child: Image.asset(
-                    'assets/algo.jpg',
-                    width: 120,
-                    height: 120,
-                    fit: BoxFit.contain,
+                  child: InkWell(
+                    onTap: changeImg,
+                    child: Image.asset(
+                      'assets/imgs/$num.jpg',
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.contain,
+                    )
                   ),
                 ),
                 Expanded(child: Column(crossAxisAlignment: .start,

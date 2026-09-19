@@ -57,7 +57,16 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/algo.jpg
+    - assets/imgs/1.jpg
+    - assets/imgs/2.jpg
+    - assets/imgs/3.jpg
+    - assets/imgs/4.jpg
+    - assets/imgs/5.jpg
+
+  fonts:
+    - family: CascadiaCode
+      fonts:
+        - asset: assets/fonts/CascadiaCode-VariableFont_wght.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:
