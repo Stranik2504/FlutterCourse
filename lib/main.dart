@@ -101,6 +101,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text('Баранов Ю. С. ИКБО-61-23', style: TextStyle(fontSize: 18)),
               ],
             ), //Row
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: changeImg,
+              child: Text('Изменить картинку'),
+            ),
           ],
         ), //Column
       ),
