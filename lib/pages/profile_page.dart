@@ -49,10 +49,11 @@ class _ProfilePageState extends State<ProfilePage> {
           key: _formKey,
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Stack(
+                alignment: Alignment.center,
                 children: [
-                  Container(
+                  Align(
+                    alignment: Alignment.centerLeft,
                     child: IconButton(
                       onPressed: () {},
                       style: IconButton.styleFrom(
@@ -62,30 +63,36 @@ class _ProfilePageState extends State<ProfilePage> {
                       icon: Icon(Icons.arrow_back_ios_new),
                     ),
                   ),
-                  Spacer(),
-                  Container(
-                      child: Text(
-                        "Профиль",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontFamily: 'CascadiaCode',
-                            fontSize: 24
-                        ),
-                      )
+                  Text(
+                    "Профиль",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'CascadiaCode',
+                        fontSize: 24
+                    ),
                   ),
-                  Spacer(),
                 ],
               ),
               const SizedBox(height: 30),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/imgs/2.jpg',
-                  width: 120,
-                  height: 120,
-                  fit: BoxFit.fill,
-                ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      'assets/imgs/2.jpg',
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  Icon(
+                    Icons.photo_camera_outlined,
+                    size: 50,
+                    color: Colors.grey,
+                  ),
+                ],
               ),
               const SizedBox(height: 20),
               CustomTextFormField(
