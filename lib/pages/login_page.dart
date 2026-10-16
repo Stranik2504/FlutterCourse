@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../routes.dart';
 import '../widgets/text_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -28,6 +29,8 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Данные успешно прошли проверку')),
       );
+
+      Navigator.pushReplacementNamed(context, Routes.home);
     }
   }
 
@@ -115,9 +118,11 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontFamily: 'CascadiaCode',
-
                       ),
                     ),
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.register);
+                    },
                   ),
                 ],
               ),

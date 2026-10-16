@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:proj_start/routes.dart';
 import '../widgets/text_field.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -55,7 +56,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, Routes.home);
+                      },
                       style: IconButton.styleFrom(
                         backgroundColor: Colors.black,
                       ),

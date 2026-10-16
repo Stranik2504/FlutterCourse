@@ -32,6 +32,8 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Данные успешно прошли проверку')),
       );
+
+      Navigator.pop(context);
     }
   }
 
@@ -126,9 +128,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontFamily: 'CascadiaCode',
-
                       ),
                     ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                   ),
                 ],
               ),
