@@ -1,6 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proj_start/pages/home/bloc/algo_bloc.dart';
 import 'package:proj_start/pages/profile_page.dart';
+
+import '../../mock/algo_data.dart';
+import '../../routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,8 +17,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _screens= [
-    MyHomePage(title: 'Алгоритмы сортировки'),
+  static const List<Widget> _screens = [
+    MyHomePageBloc(title: 'Алгоритмы сортировки'),
     ProfilePage(),
   ];
 
@@ -48,6 +53,44 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+class MyHomePageBloc extends StatefulWidget {
+  const MyHomePageBloc({super.key, required this.title});
+  final String title;
+
+  @override
+  State<MyHomePageBloc> createState() => _MyHomePageBlocState();
+}
+
+class _MyHomePageBlocState extends State<MyHomePageBloc> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocBuilder<AlgoBloc, AlgoState>(
+        //Перестройка UI при изменении состояния
+        builder: (context, state) {
+          switch (state) {
+            case AlgoInitial():
+              return const Center(child: Text('Данные еще не загружены'));
+
+            case AlgoLoading():
+              return const Center(child: CircularProgressIndicator());
+
+            case AlgoError(:final message):
+              return Center(child: Text(message));
+
+            case AlgoLoaded(:final terms):
+              if (terms.isEmpty) {
+                return const Center(child: Text('Список пуст'));
+              }
+
+              return MyHomePage(title: widget.title);
+          }
+        },
+      ),
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -58,12 +101,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int num = 1;
-
-  static const List<String> terms = [
-    "1. Пузырьковая сортировка",
-    "2. Сортировка вставками",
-    "3. Quick sort",
-  ];
 
   Container getImg(int ind) {
     return Container(
@@ -157,9 +194,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisSpacing: isDesktopLayout ? platformPadding : 8,
                     crossAxisSpacing: isDesktopLayout ? platformPadding : 0,
                   ),
-                  itemCount: terms.length,
+                  itemCount: alogs.length,
                   itemBuilder: (context, index) {
-                    final term = terms[index];
+                    final algo = alogs[index];
 
                     return Card(
                       margin: EdgeInsets.zero,
@@ -170,14 +207,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         minTileHeight: 0,
                         title: Text(
-                          term,
+                          algo.title,
                           style: const TextStyle(
                             fontSize: 18,
                             fontFamily: 'CascadiaCode',
                           ),
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, '/detail/${index + 1}');
+                          Navigator.pushNamed(
+                            context,
+                            Routes.detail,
+                            arguments: algo
+                          );
                         },
                       ),
                     );

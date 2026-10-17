@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:proj_start/pages/home_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proj_start/pages/home/bloc/algo_bloc.dart';
+import 'package:proj_start/pages/home/home_page.dart';
 import 'package:proj_start/pages/loading_page.dart';
 import 'package:proj_start/pages/login_page.dart';
 import 'package:proj_start/pages/register_page.dart';
@@ -24,14 +26,15 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: Routes.loading,
       routes: {
-        Routes.home: (_) => const HomePage(),
+        Routes.home: (context) => BlocProvider(
+          create: (_) => AlgoBloc()..add(const LoadAlgoEvent()),
+          child: const HomePage(),
+        ),
         Routes.loading: (_) => const LoadingPage(),
         Routes.login: (_) => const LoginPage(),
         Routes.register: (_) => const RegisterPage(),
         Routes.profile: (_) => const ProfilePage(),
-        "${Routes.detail}/1": (_) => const DetailPage(number: 1),
-        "${Routes.detail}/2": (_) => const DetailPage(number: 2),
-        "${Routes.detail}/3": (_) => const DetailPage(number: 3),
+        Routes.detail: (_) => const DetailPage(),
       },
     );
   }
