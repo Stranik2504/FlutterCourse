@@ -1,14 +1,16 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../../mock/algo_data.dart';
 import '../../../models/algo.dart';
+import '../../../data/algos_repository.dart';
 
 part 'algo_event.dart';
 part 'algo_state.dart';
 
 class AlgoBloc extends Bloc<AlgoEvent, AlgoState> {
-  AlgoBloc() : super(const AlgoInitial()) {
+  final AlgosRepository repository;
+  
+  AlgoBloc(this.repository) : super(const AlgoInitial()) {
     on<LoadAlgoEvent>(_onLoadAlogs);
   }
 
@@ -18,6 +20,7 @@ class AlgoBloc extends Bloc<AlgoEvent, AlgoState> {
       // Simulate a delay for loading data
       await Future.delayed(const Duration(seconds: 2));
 
+      final alogs = await repository.getAlgos();
       emit(AlgoLoaded(alogs));
     } catch (e) {
       emit(AlgoError(e.toString()));

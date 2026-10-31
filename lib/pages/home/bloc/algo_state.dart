@@ -16,8 +16,8 @@ final class AlgoLoading extends AlgoState {
 
 // Успешная загрузка: получен список терминов
 final class AlgoLoaded extends AlgoState {
-  final List<Algo> terms;
-  const AlgoLoaded(this.terms);
+  final List<Algo> algos;
+  const AlgoLoaded(this.algos);
 }
 
 // Ошибка при загрузке

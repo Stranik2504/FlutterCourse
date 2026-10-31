@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:proj_start/di/di.dart';
 import 'package:proj_start/pages/home/bloc/algo_bloc.dart';
 import 'package:proj_start/pages/home/home_page.dart';
 import 'package:proj_start/pages/loading_page.dart';
@@ -10,6 +11,7 @@ import 'package:proj_start/pages/detail_page.dart';
 import 'package:proj_start/routes.dart';
 
 void main() {
+  setupDI();
   runApp(const MyApp());
 }
 
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.loading,
       routes: {
         Routes.home: (context) => BlocProvider(
-          create: (_) => AlgoBloc()..add(const LoadAlgoEvent()),
+          create: (_) => getIt<AlgoBloc>()..add(const LoadAlgoEvent()),
           child: const HomePage(),
         ),
         Routes.loading: (_) => const LoadingPage(),

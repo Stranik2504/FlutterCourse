@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proj_start/pages/home/bloc/algo_bloc.dart';
 import 'package:proj_start/pages/profile_page.dart';
 
-import '../../mock/algo_data.dart';
+import '../../models/algo.dart';
 import '../../routes.dart';
 
 class HomePage extends StatefulWidget {
@@ -78,12 +78,12 @@ class _MyHomePageBlocState extends State<MyHomePageBloc> {
             case AlgoError(:final message):
               return Center(child: Text(message));
 
-            case AlgoLoaded(:final terms):
-              if (terms.isEmpty) {
+            case AlgoLoaded(:final algos):
+              if (algos.isEmpty) {
                 return const Center(child: Text('Список пуст'));
               }
 
-              return MyHomePage(title: widget.title);
+              return MyHomePage(title: widget.title, algos: algos,);
           }
         },
       ),
@@ -92,8 +92,9 @@ class _MyHomePageBlocState extends State<MyHomePageBloc> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.algos});
   final String title;
+  final List<Algo> algos;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -194,9 +195,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisSpacing: isDesktopLayout ? platformPadding : 8,
                     crossAxisSpacing: isDesktopLayout ? platformPadding : 0,
                   ),
-                  itemCount: alogs.length,
+                  itemCount: widget.algos.length,
                   itemBuilder: (context, index) {
-                    final algo = alogs[index];
+                    final algo = widget.algos[index];
 
                     return Card(
                       margin: EdgeInsets.zero,
