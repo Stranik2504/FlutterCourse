@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../../models/algo.dart';
@@ -7,6 +8,7 @@ import '../../../data/algos_repository.dart';
 part 'algo_event.dart';
 part 'algo_state.dart';
 
+@injectable
 class AlgoBloc extends Bloc<AlgoEvent, AlgoState> {
   final AlgosRepository repository;
   
