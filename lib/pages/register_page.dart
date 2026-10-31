@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/theme_toggle_action.dart';
 import '../widgets/text_field.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -40,6 +41,11 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: const [
+          ThemeToggleAction(), // добавили кнопку
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.only(
           left: 16,
@@ -56,11 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Text(
                   "Регистрация",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontFamily: 'CascadiaCode',
-                    fontSize: 24
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 )
               ),
               const SizedBox(height: 40),
@@ -98,37 +100,23 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () => _submit(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  minimumSize: Size(200, 40),
-                ),
-                child: const Text(
+                child: Text(
                   "Зарегистрироваться",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontFamily: 'CascadiaCode',
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "Уже есть аккаунт? ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w100,
-                      fontFamily: 'CascadiaCode',
-                    ),
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
                   GestureDetector(
-                    child: const Text(
+                    child: Text(
                       "Войдите",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'CascadiaCode',
-                      ),
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
                     onTap: () {
                       Navigator.pop(context);

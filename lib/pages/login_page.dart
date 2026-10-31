@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../routes.dart';
+import '../theme/theme_toggle_action.dart';
 import '../widgets/text_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,14 +39,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Добро пожаловать!\nВойдите в свой аккаунт\nИли создайте новый",
-          style: TextStyle(
-            fontWeight: FontWeight.w300,
-            fontFamily: 'CascadiaCode',
-          ),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         toolbarHeight: 150,
+        actions: const [
+          ThemeToggleAction(), // добавили кнопку
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -79,46 +80,29 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text(
                   "Забыл пароль?",
                   textAlign: TextAlign.right,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w100,
-                    fontFamily: 'CascadiaCode',
-                  ),
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () => _submit(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  minimumSize: Size(200, 40),
-                ),
-                child: const Text(
+                child: Text(
                   "Войти",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontFamily: 'CascadiaCode',
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "Нет аккаунта? ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w100,
-                        fontFamily: 'CascadiaCode',
-                    ),
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
                   GestureDetector(
-                    child: const Text(
+                    child: Text(
                       "Зарегистрируйтесь",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'CascadiaCode',
-                      ),
+                      style: Theme.of(context).textTheme.labelLarge,
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, Routes.register);

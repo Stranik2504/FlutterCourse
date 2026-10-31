@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/algo.dart';
+import '../theme/theme_toggle_action.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -16,8 +17,10 @@ class _DetailPage extends State<DetailPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 157, 255, 0),
         title: Center(child: Text(algo.subTitle)),
+        actions: const [
+          ThemeToggleAction(), // добавили кнопку
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -36,11 +39,7 @@ class _DetailPage extends State<DetailPage> {
             const SizedBox(height: 16),
             Text(
               algo.description,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w300,
-                fontFamily: 'CascadiaCode',
-              )
+              style: Theme.of(context).textTheme.bodyLarge
             ),
           ],
         ),

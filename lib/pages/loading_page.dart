@@ -40,14 +40,10 @@ class _LoadingPage extends State<LoadingPage> {
                 ),
               ),
               const SizedBox(height: 40),
-              const Text(
+              Text(
                 "Алгоритмы сортировки",
-                style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontFamily: 'CascadiaCode',
-                  fontSize: 24,
-                ),
-              ),
+                style: Theme.of(context).textTheme.titleMedium,
+              )
             ],
           ),
         ),

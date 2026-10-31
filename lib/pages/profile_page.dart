@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:proj_start/routes.dart';
+import '../theme/theme_toggle_action.dart';
 import '../widgets/text_field.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -39,6 +40,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: const [
+          ThemeToggleAction(), // добавили кнопку
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.only(
           left: 16,
@@ -69,11 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Text(
                     "Профиль",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'CascadiaCode',
-                        fontSize: 24
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ],
               ),
@@ -132,17 +134,9 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () => _submit(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  minimumSize: Size(200, 40),
-                ),
-                child: const Text(
+                child: Text(
                   "Сохранить",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontFamily: 'CascadiaCode',
-                    color: Colors.white,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
             ],

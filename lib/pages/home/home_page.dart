@@ -6,6 +6,7 @@ import 'package:proj_start/pages/profile_page.dart';
 
 import '../../models/algo.dart';
 import '../../routes.dart';
+import '../../theme/theme_toggle_action.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,9 +31,6 @@ class _HomePageState extends State<HomePage> {
         children: _screens,
       ),
       bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.deepPurple.shade50,
-        indicatorColor: Colors.deepPurple.shade100,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         animationDuration: const Duration(milliseconds: 500),
         selectedIndex: _selectedIndex,
         onDestinationSelected: (index) => setState(() => _selectedIndex = index),
@@ -132,29 +130,27 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 157, 255, 0),
         title: Center(child: Text(widget.title)),
+        actions: const [
+          ThemeToggleAction(), // добавили кнопку
+        ],
       ),
       body:  SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
+            Center(
                 child: Text(
                   'Алгоритмы сортировки',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'CascadiaCode',
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium,
                 )
             ),
-            const Center(
+            Center(
               child: Text(
                 'Мы визуализируем и объясняем алгоритмы сортировки. '
                     'Наша цель — разложить по полочкам порядок, сложность и логику работы с данными.',
-                style: TextStyle(fontSize: 16, fontFamily: 'CascadiaCode',),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
             const Divider(),
@@ -209,10 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         minTileHeight: 0,
                         title: Text(
                           algo.title,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'CascadiaCode',
-                          ),
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         onTap: () {
                           Navigator.pushNamed(
@@ -228,11 +221,11 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             const SizedBox(height: 20),
-            const Row(
+            Row(
               children: [
                 Icon(Icons.groups, color: Colors.blue), // иконка слева
                 SizedBox(width: 8), // отступ между иконкой и текстом
-                Text('Баранов Ю. С. ИКБО-61-23', style: TextStyle(fontSize: 18)),
+                Text('Баранов Ю. С. ИКБО-61-23', style: Theme.of(context).textTheme.bodySmall),
               ],
             ), //Row
           ],
